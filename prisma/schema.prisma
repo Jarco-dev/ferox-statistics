@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model RegistrationCodes {
+  uuid      String   @id @db.VarChar(255)
+  code      String   @unique(map: "code") @db.VarChar(255)
+  createdat DateTime @default(now()) @db.DateTime(0)
+}
+
+model Stats {
+  uuid          String   @id @db.VarChar(255)
+  kills         Int?     @default(0)
+  deaths        Int?     @default(0)
+  nexusesbroken Int?     @default(0)
+  arrowsshot    Int      @default(0)
+  arrowshit     Int      @default(0)
+  wins          Int      @default(0)
+  loses         Int      @default(0)
+  playtime      Int?
+  createdat     DateTime @default(now()) @db.Timestamp(0)
+  updatedat     DateTime @default(now()) @db.DateTime(0)
+  discordid     String?  @unique(map: "discordid") @db.VarChar(19)
+}
