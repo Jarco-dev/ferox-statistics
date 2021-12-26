@@ -9,9 +9,8 @@ class PresenceFeature extends BaseFeature {
         this.client.user!.setPresence({
             status: "online",
             activities: [{
-                name: "todos for staff",
-                type: "STREAMING",
-                url: "https://www.twitch.tv/feroxhosting"
+                type: "WATCHING",
+                name: `${this.client.users.cache.size} users`
             }]
         });
     }

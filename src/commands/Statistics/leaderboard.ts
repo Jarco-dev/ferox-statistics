@@ -46,14 +46,15 @@ class LeaderboardCommand extends BaseCommand {
         const statistic = i.options.getString("statistic", true) as StatisticType;
         const data = await this.prisma.stats.findMany({
             take: 10,
-            orderBy: [{ [statistic]: "desc" }, { updatedat: "asc" }]
+            orderBy: [{ [statistic]: "desc" }, { updatedat: "asc" }],
         });
 
         // Create and send the embed
         let desc = "";
         for (let i = 0; i < data.length; i++) {
             const username = await this.mojang.getUsername(data[i].uuid);
-            desc += `**${i+1}.** ${data[i][statistic]} - ${username}\n`;
+            let stat = (statistic === "playtime") ? this.global.parseTime(data[i][statistic] ?? 0) : data[i][statistic];
+            desc += `**${i+1}.** ${stat} - ${username}\n`;
         }
 
         const embed = this.global.embed()

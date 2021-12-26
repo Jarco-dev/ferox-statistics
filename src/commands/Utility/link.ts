@@ -33,7 +33,7 @@ class LinkCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "ENABLED"
+            status: "DEV"
         });
     }
 
@@ -68,9 +68,9 @@ class LinkCommand extends BaseCommand {
             .setDescription(`
                 **1.** Login to the minecraft server \`${this.sConfig.MISC.SERVER_IP}\`
                 **2.** Run the \`/verify\` command in game to get a token
-                **4.** Go into any server with the \`${this.client.user!.username}\` bot
-                **5.** Run the command bot command \`/link confirm\` providing the received token
-                **6.** You're all set and ready to go! 
+                **3.** Go into any server with the \`${this.client.user!.username}\` bot
+                **4.** Run the command bot command \`/link confirm\` providing the received token
+                **5.** You're all set and ready to go! 
             `);
 
         this.sender.reply(i, { embeds: [embed] });
@@ -175,9 +175,9 @@ class LinkCommand extends BaseCommand {
             }, { msgType: "SUCCESS", method: "UPDATE" });
         } else if (i2.customId === "link_reset_confirm") {
             reply.components.forEach((row) => row.components.forEach((comp) => comp.disabled = true));
-            await this.prisma.stats.update({ data: { discordid: null }, where: { uuid: data.uuid } });
+            // await this.prisma.stats.update({ data: { discordid: null }, where: { uuid: data.uuid } });
             this.sender.reply(i2, {
-                content: "The accounts have been unlinked",
+                content: "The accounts have been unlinked (database querry currently disabled)",
                 components: reply.components
             }, { msgType: "SUCCESS", method: "UPDATE" });
         }

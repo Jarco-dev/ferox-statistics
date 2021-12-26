@@ -5,6 +5,9 @@ export interface SecretConfig {
     LOG_LEVEL: LogLevel;
     CMD_LOAD_LEVEL: CommandStatus;
     CMD_DEV_GUILD: Snowflake;
+    LINKS: {
+        BOT_INVITE: string;
+    }
     MISC: {
         METRICS_PORT: number;
         SERVER_IP: string;

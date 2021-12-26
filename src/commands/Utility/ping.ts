@@ -19,7 +19,7 @@ class PingCommand extends BaseCommand {
                 }]
             }],
             cooldown: 3000,
-            status: "ENABLED"
+            status: "DEV"
         });
 
         this.rttEmoji = "🔁";
