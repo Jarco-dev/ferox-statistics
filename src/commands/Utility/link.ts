@@ -73,14 +73,17 @@ class LinkCommand extends BaseCommand {
                 **5.** You're all set and ready to go! 
             `);
 
-        this.sender.reply(i, { embeds: [embed] });
+        this.sender.reply(i, { embeds: [embed], ephemeral: true });
     }
 
     private async _runConfirmSubCommand(i: CommandInteraction): Promise<void> {
         // Check link status
         const linkedData = await this.prisma.stats.findUnique({ where: { discordid: i.user.id } });
         if (linkedData) {
-            this.sender.reply(i, { content: "You are already linked, see `/link status` for more and `/link reset` to reset" }, { msgType: "INVALID" });
+            this.sender.reply(i, {
+                content: "You are already linked, see `/link status` for more and `/link reset` to reset",
+                ephemeral: true
+            }, { msgType: "INVALID" });
             return;
         }
 
@@ -111,8 +114,12 @@ class LinkCommand extends BaseCommand {
         // Link user
         await this.prisma.registrationCodes.delete({ where: { code: token } });
         await this.prisma.stats.update({ data: { discordid: i.user.id }, where: { uuid: data.uuid } });
+        await this.prisma.userSettings.create({ data: { id: i.user.id, dmStats: false } });
         const username = await this.mojang.getUsername(data.uuid);
-        this.sender.reply(i, { content: `Your account is now linked to \`${username}\`` }, { msgType: "SUCCESS" });
+        const embed = this.global.embed()
+            .setTitle(`Your account is now linked to \`${username}\``)
+            .setDescription("If you would like statistics in your dm after each of your games please look at `/settings dmstats`");
+        this.sender.reply(i, { embeds: [embed], ephemeral: true });
     }
 
     private async _runStatusSubCommand(i: CommandInteraction): Promise<void> {
@@ -126,7 +133,10 @@ class LinkCommand extends BaseCommand {
             }, { msgType: "INVALID" });
         } else {
             const username = await this.mojang.getUsername(data.uuid);
-            this.sender.reply(i, { content: `Your account is currently linked to \`${username}\`` }, { msgType: "SUCCESS" });
+            this.sender.reply(i, {
+                content: `Your account is currently linked to \`${username}\``,
+                ephemeral: true
+            }, { msgType: "SUCCESS" });
         }
     }
 
@@ -183,6 +193,7 @@ class LinkCommand extends BaseCommand {
         } else if (i2.customId === "link_reset_confirm") {
             reply.components.forEach((row) => row.components.forEach((comp) => comp.disabled = true));
             await this.prisma.stats.update({ data: { discordid: null }, where: { uuid: data.uuid } });
+            await this.prisma.userSettings.delete({ where: { id: i.user.id } });
             this.sender.reply(i2, {
                 content: "The accounts have been unlinked",
                 components: reply.components

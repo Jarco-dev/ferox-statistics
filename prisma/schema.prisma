@@ -44,3 +44,8 @@ model GameStats {
   teambluemembers String   @db.LongText
   teamredmembers  String   @db.LongText
 }
+
+model UserSettings {
+  id      String  @id @db.VarChar(19)
+  dmStats Boolean @default(false)
+}

@@ -61,7 +61,7 @@ class PingCommand extends BaseCommand {
                         ${this.rttEmoji} **RTT**: ${timeDiff}ms
                         ${this.hbEmoji} **Heartbeat**: ${this.client.ws.ping}ms
                     `);
-                this.sender.reply(i, { embeds: [resultEmbed] }, { method: "EDIT_REPLY" });
+                this.sender.reply(i, { embeds: [resultEmbed], ephemeral: true }, { method: "EDIT_REPLY" });
             }
         }
     }
