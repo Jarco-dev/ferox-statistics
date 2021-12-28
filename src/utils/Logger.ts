@@ -1,11 +1,10 @@
 import moment from "moment";
-import type Client from "../index";
 import type { LogLevel } from "../types";
 
 class Logger {
     private level: 0 | 1 | 2 | 3 | 4;
 
-    constructor(client: typeof Client) {
+    constructor() {
         this.level = 0;
     }
 
