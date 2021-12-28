@@ -15,7 +15,7 @@ import Sender from "./utils/Sender";
 class Client extends DiscordClient {
     public sConfig = require("../secret/config") as SecretConfig;
     public config = config;
-    public logger = new Logger(this);
+    public logger = new Logger();
     public prisma = new PrismaClient();
     public sender = new Sender(this);
     public global = new Global(this);
