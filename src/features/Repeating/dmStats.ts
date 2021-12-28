@@ -99,7 +99,7 @@ class DmStats extends BaseFeature {
 
         for (const id of userIds) {
             const userSettings = await this.prisma.userSettings.findUnique({ where: { id } });
-            if (userSettings && userSettings.dmStats) this.sender.msgUser(id, { embeds: [embed] });
+            if (userSettings && userSettings.dmStats) this.sender.msgUser(id, { embeds: [embed] }).catch(() => {});
         }
     }
 }
