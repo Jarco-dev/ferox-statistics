@@ -1,6 +1,6 @@
-import type Client from "../index";
 import type { ButtonInteraction, Channel, ChannelMention, CommandInteraction, Guild, GuildChannel, GuildMember, PermissionResolvable, Role, RoleMention, SelectMenuInteraction, Snowflake, TextBasedChannels, User, UserMention } from "discord.js";
 import { DMChannel, Interaction, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } from "discord.js";
+import type Client from "../index";
 
 class Global {
     private client: typeof Client;
@@ -13,8 +13,6 @@ class Global {
         this.logger = client.logger;
         this.config = client.config;
         this.sender = client.sender;
-
-        console.log(this.parseTime(23987234987234));
     }
 
     public embed(): MessageEmbed {

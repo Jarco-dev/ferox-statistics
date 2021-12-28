@@ -1,6 +1,6 @@
-import BaseCommand from "../../utils/structures/BaseCommand";
-import moment from "moment";
 import type { CommandInteraction, MessageComponentInteraction } from "discord.js";
+import moment from "moment";
+import BaseCommand from "../../utils/structures/BaseCommand";
 
 class LinkCommand extends BaseCommand {
     constructor() {
@@ -33,7 +33,7 @@ class LinkCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 

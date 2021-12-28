@@ -1,9 +1,9 @@
-import BaseCommand from "../utils/structures/BaseCommand";
+import type { Snowflake } from "discord.js";
 import { promises as fs } from "fs";
 import path from "path";
 import type Client from "../index";
-import type { Snowflake } from "discord.js";
 import type { CommandStatus } from "../types";
+import BaseCommand from "../utils/structures/BaseCommand";
 
 class CommandLoader {
     public commands: { [key: string]: BaseCommand };

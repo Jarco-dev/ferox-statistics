@@ -1,5 +1,5 @@
-import Client from "../../index";
 import type { ApplicationCommandOptionData, ApplicationCommandType, CommandInteraction, PermissionResolvable } from "discord.js";
+import Client from "../../index";
 import type { CommandStatus } from "../../types";
 
 abstract class BaseCommand {
@@ -22,6 +22,9 @@ abstract class BaseCommand {
     public global = Client.global;
     public mojang = Client.mojang;
     public metricsManager = Client.metricsManager;
+    public commandLoader = Client.commandLoader;
+    public eventLoader = Client.eventLoader;
+    public featureLoader = Client.featureLoader;
 
     protected constructor(p: {
         name: string;

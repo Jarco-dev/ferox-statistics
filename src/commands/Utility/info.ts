@@ -1,5 +1,5 @@
-import BaseCommand from "../../utils/structures/BaseCommand";
 import type { CommandInteraction } from "discord.js";
+import BaseCommand from "../../utils/structures/BaseCommand";
 
 class InfoCommand extends BaseCommand {
     constructor() {
@@ -7,7 +7,7 @@ class InfoCommand extends BaseCommand {
             name: "info",
             description: "View some information about the bot",
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 

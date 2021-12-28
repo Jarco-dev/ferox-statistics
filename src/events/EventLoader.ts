@@ -1,7 +1,7 @@
-import BaseEvent from "../utils/structures/BaseEvent";
 import { promises as fs } from "fs";
 import path from "path";
 import type Client from "../index";
+import BaseEvent from "../utils/structures/BaseEvent";
 
 class EventLoader {
     public events: { [key: string]: BaseEvent };

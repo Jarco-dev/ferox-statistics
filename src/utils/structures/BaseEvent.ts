@@ -11,6 +11,9 @@ abstract class BaseEvent {
     public global = Client.global;
     public mojang = Client.mojang;
     public metricsManager = Client.metricsManager;
+    public commandLoader = Client.commandLoader;
+    public eventLoader = Client.eventLoader;
+    public featureLoader = Client.featureLoader;
 
     protected constructor(name: string) {
         this.name = name;

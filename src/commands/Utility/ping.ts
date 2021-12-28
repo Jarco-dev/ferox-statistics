@@ -1,5 +1,5 @@
-import BaseCommand from "../../utils/structures/BaseCommand";
 import type { CommandInteraction, Message } from "discord.js";
+import BaseCommand from "../../utils/structures/BaseCommand";
 
 class PingCommand extends BaseCommand {
     public rttEmoji: string;
@@ -19,7 +19,7 @@ class PingCommand extends BaseCommand {
                 }]
             }],
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
 
         this.rttEmoji = "🔁";

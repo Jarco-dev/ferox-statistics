@@ -1,7 +1,7 @@
-import BaseFeature from "../utils/structures/BaseFeature";
 import { promises as fs } from "fs";
 import path from "path";
 import Client from "../index";
+import BaseFeature from "../utils/structures/BaseFeature";
 
 class FeatureLoader {
     public client: typeof Client;

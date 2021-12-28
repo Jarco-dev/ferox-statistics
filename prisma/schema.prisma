@@ -31,7 +31,7 @@ model Stats {
 
 model GameStats {
   id              Int      @id @default(autoincrement())
-  createdat       DateTime @default(now()) @db.Date
+  createdat       DateTime @default(now()) @db.DateTime(0)
   gamemap         String   @db.VarChar(25)
   totalkills      Int
   totaldeaths     Int
@@ -39,8 +39,8 @@ model GameStats {
   totalarrowshit  Int
   blocksplaced    Int
   blocksbroken    Int
-  matchduration   BigInt
+  matchduration   Int      @default(0)
   winner          String   @db.VarChar(50)
-  teambluemembers String
-  teamredmembers  String
+  teambluemembers String   @db.LongText
+  teamredmembers  String   @db.LongText
 }

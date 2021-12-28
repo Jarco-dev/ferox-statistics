@@ -1,8 +1,8 @@
-import BaseCommand from "../../utils/structures/BaseCommand";
 import type prisma from "@prisma/client";
 import type { CommandInteraction, MessageComponentInteraction, MessageSelectOptionData, SelectMenuInteraction } from "discord.js";
-import { GameStatistics } from "../../types";
 import moment from "moment";
+import { GameStatistics } from "../../types";
+import BaseCommand from "../../utils/structures/BaseCommand";
 
 class GameStatsCommand extends BaseCommand {
     constructor() {
@@ -29,7 +29,7 @@ class GameStatsCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 
@@ -48,7 +48,7 @@ class GameStatsCommand extends BaseCommand {
         // No more than 1 input
         if (inputCount > 1) {
             this.sender.reply(i, {
-                content: "You can only provide one of id, username and user at a time",
+                content: "You can only provide one of id, username or user at a time",
                 ephemeral: true
             }, { msgType: "INVALID" });
             return;
@@ -135,7 +135,6 @@ class GameStatsCommand extends BaseCommand {
             if (data.length === 1) data = data[1];
             else {
                 // Turn around array if needed
-                this.logger.debug(data);
                 if (data[0].id < data[1].id) data.reverse();
 
                 // Crate the component
@@ -165,7 +164,7 @@ class GameStatsCommand extends BaseCommand {
 
                 // Await and handle user input
                 const filter = (i2: MessageComponentInteraction) => i2.user.id === i.user.id;
-                const i2 = await reply.awaitMessageComponent({ filter, time: 15000 })
+                const i2 = await reply.awaitMessageComponent({ filter, time: 60000 })
                     .catch(() => {}) as SelectMenuInteraction | undefined;
 
                 if (!i2) {
@@ -205,14 +204,31 @@ class GameStatsCommand extends BaseCommand {
 
         // Create and send the embed
         const embed = this.global.embed()
-            .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/play.ferox.host`)
+            .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/${this.sConfig.MISC.SERVER_IP}`)
             .setTitle(`Game #${gameStats.id}`)
-            .addField("Misc", `\`>\` Winner: \`${gameStats.winner}\`\n\`>\` Map: \`${gameStats.gamemap}\`\n\`>\` Duration: \`${gameStats.matchduration}\`\n\`>\` Date: \`${gameStats.createdat}\``)
-            .addField("Bow", `\`>\` Shots taken: \`${gameStats.totalarrowsshot}\`\n\`>\` Shots hit: \`${gameStats.totalarrowshit}\`\n\`>\` Accuracy: \`${gameStats.bowAccuracy}\``, true)
-            .addField("Combat", `\`>\` Kills: \`${gameStats.totalkills}\`\n\`>\` Deaths: \`${gameStats.totaldeaths}\`\n\`>\` KDR: \`${gameStats.killDeathRatio}\``, true)
-            .addField("Blocks", `\`>\` Placed: \`${gameStats.blocksplaced}\`\n\`>\` Broken: \`${gameStats.blocksbroken}\``, true)
-            .addField(`Team red (${gameStats.teamRedNames.length})`, gameStats.teamRedNames.join(", ") || "No members found", true)
-            .addField(`Team blue (${gameStats.teamBlueNames.length})`, gameStats.teamBlueNames.join(", ") || "No members found", true);
+            .addField("Misc", `
+                \`>\` Winner: \`${gameStats.winner}\`
+                \`>\` Map: \`${gameStats.gamemap}\`
+                \`>\` Duration: \`${gameStats.matchduration}\`
+                \`>\` Date: \`${gameStats.createdat}\`
+            `)
+            .addField("Bow", `
+                \`>\` Shots taken: \`${gameStats.totalarrowsshot}\`
+                \`>\` Shots hit: \`${gameStats.totalarrowshit}\`
+                \`>\` Accuracy: \`${gameStats.bowAccuracy}\`
+            `, true)
+            .addField("Combat", `
+                \`>\` Kills: \`${gameStats.totalkills}\`
+                \`>\` Deaths: \`${gameStats.totaldeaths}\`
+                \`>\` KDR: \`${gameStats.killDeathRatio}\`
+            `, true)
+            .addField("Blocks", `
+                \`>\` Placed: \`${gameStats.blocksplaced}\`
+                \`>\` Broken: \`${gameStats.blocksbroken}\`
+            `, true)
+            .addField(`Team red (${gameStats.teamRedNames.length})`, gameStats.teamRedNames.join(", ") || "No usernames found", true)
+            .addField(`Team blue (${gameStats.teamBlueNames.length})`, gameStats.teamBlueNames.join(", ") || "No usernames found", true);
+
         this.sender.reply(i, {
             embeds: [embed],
             components: [],

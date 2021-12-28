@@ -1,5 +1,5 @@
-import type { ClientOptions, HexColorString, Snowflake } from "discord.js";
 import type { GameStats, Stats } from "@prisma/client";
+import type { ClientOptions, HexColorString, Snowflake } from "discord.js";
 
 export interface SecretConfig {
     LOG_LEVEL: LogLevel;
@@ -83,7 +83,7 @@ export type LogLevel =
     | "WARN"
     | "ERROR";
 
-export type StatisticType =
+export type UserStatisticType =
     | "wins"
     | "loses"
     | "kills"
@@ -92,3 +92,12 @@ export type StatisticType =
     | "arrowshit"
     | "playtime"
     | "nexusesbroken"
+
+export type GameStatisticType =
+    | "totalkills"
+    | "totaldeaths"
+    | "totalarrowsshot"
+    | "totalarrowshit"
+    | "blocksplaced"
+    | "blocksbroken"
+    | "matchduration"

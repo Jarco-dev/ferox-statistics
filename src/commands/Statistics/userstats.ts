@@ -1,8 +1,8 @@
-import BaseCommand from "../../utils/structures/BaseCommand";
-import moment from "moment";
-import type { UserStatistics } from "../../types";
 import type prisma from "@prisma/client";
 import type { CommandInteraction } from "discord.js";
+import moment from "moment";
+import type { UserStatistics } from "../../types";
+import BaseCommand from "../../utils/structures/BaseCommand";
 
 class UserStatsCommand extends BaseCommand {
     constructor() {
@@ -25,7 +25,7 @@ class UserStatsCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 
@@ -98,7 +98,7 @@ class UserStatsCommand extends BaseCommand {
 
         // Create and send the embed
         const embed = this.global.embed()
-            .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/play.ferox.host`)
+            .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/${this.sConfig.MISC.SERVER_IP}`)
             .setTitle(userStats.username)
             .setThumbnail(`https://crafatar.com/renders/head/${userStats.uuid}?overlay`)
             .addField("Misc", `

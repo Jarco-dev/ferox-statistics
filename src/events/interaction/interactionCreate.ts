@@ -1,7 +1,7 @@
-import BaseEvent from "../../utils/structures/BaseEvent";
-import Client from "../../index";
 import type { Interaction } from "discord.js";
 import { Collection, TextChannel } from "discord.js";
+import Client from "../../index";
+import BaseEvent from "../../utils/structures/BaseEvent";
 
 class InteractionCreateEvent extends BaseEvent {
     private readonly commands: typeof Client.commandLoader.commands;

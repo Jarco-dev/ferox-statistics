@@ -1,5 +1,5 @@
-import Client from "./Client";
 import dotenv from "dotenv";
+import Client from "./Client";
 
 const client = new Client();
 dotenv.config();

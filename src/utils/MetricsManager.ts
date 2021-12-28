@@ -1,7 +1,7 @@
-import type { Express } from "express";
-import express from "express";
 import type { GCStatistics, GCStatsEventEmitter } from "@sematext/gc-stats";
 import gcStats from "@sematext/gc-stats";
+import type { Express } from "express";
+import express from "express";
 import PromClient from "prom-client";
 import type Client from "../index";
 

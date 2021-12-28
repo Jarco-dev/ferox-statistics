@@ -1,6 +1,6 @@
+import type { CommandInteraction } from "discord.js";
 import Client from "../index";
 import BaseCommand from "./structures/BaseCommand";
-import type { CommandInteraction } from "discord.js";
 
 
 class CooldownManager {
