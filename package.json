@@ -1,6 +1,6 @@
 {
     "name": "ferox-stats",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "The ferox stats discord bot",
     "main": "dist/index.js",
     "scripts": {
