@@ -184,7 +184,7 @@ class GameStatsCommand extends BaseCommand {
         data = data as prisma.GameStats;
         const gameStats: GameStatistics = {
             ...data,
-            killDeathRatio: (data.totalkills / data.totaldeaths).toFixed(2),
+            killDeathRatio: (data.totaldeaths > 0 && data.totalkills > 0) ? (data.totalkills / data.totaldeaths).toFixed(2) : "0.00",
             bowAccuracy: (data.totalarrowsshot === 0) ? `100%` : `${Math.round((data.totalarrowsshot / data.totalarrowsshot) * 100)}%`,
             matchduration: this.global.parseTime(parseInt(data.matchduration.toString())),
             teamBlueNames: [],

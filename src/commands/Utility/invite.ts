@@ -25,7 +25,7 @@ class InviteCommand extends BaseCommand {
                     .setLabel("Invite")
             ]);
 
-        this.sender.reply(i, { embeds: [embed], components: [row1] });
+        this.sender.reply(i, { embeds: [embed], components: [row1], ephemeral: true });
     }
 }
 
