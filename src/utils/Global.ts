@@ -13,6 +13,8 @@ class Global {
         this.logger = client.logger;
         this.config = client.config;
         this.sender = client.sender;
+
+        console.log(this.parseTime(23987234987234));
     }
 
     public embed(): MessageEmbed {
@@ -82,8 +84,12 @@ class Global {
         if (duration >= 1) result = hour + "h " + result;
 
         duration = Math.floor(duration / 24);
-        let day = duration;
+        let day = duration % 365;
         if (duration >= 1) result = day + "d " + result;
+
+        duration = Math.floor(duration / 365);
+        let year = duration;
+        if (duration >= 1) result = year + "y " + result;
 
         return result;
     }

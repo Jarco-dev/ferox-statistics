@@ -1,5 +1,5 @@
 import type { ClientOptions, HexColorString, Snowflake } from "discord.js";
-import type { Stats } from "@prisma/client";
+import type { GameStats, Stats } from "@prisma/client";
 
 export interface SecretConfig {
     LOG_LEVEL: LogLevel;
@@ -7,7 +7,7 @@ export interface SecretConfig {
     CMD_DEV_GUILD: Snowflake;
     LINKS: {
         BOT_INVITE: string;
-    }
+    };
     MISC: {
         METRICS_PORT: number;
         SERVER_IP: string;
@@ -47,7 +47,16 @@ export type UserStatistics = Modify<Stats, {
     bowAccuracy: string;
     playtime: string;
     createdat: string;
-    updatedat: string;
+    gamesPlayed: number;
+}>
+
+export type GameStatistics = Modify<GameStats, {
+    killDeathRatio: string;
+    bowAccuracy: string;
+    matchduration: string;
+    teamBlueNames: string[];
+    teamRedNames: string[];
+    createdat: string;
 }>
 
 export type SenderMessageType =

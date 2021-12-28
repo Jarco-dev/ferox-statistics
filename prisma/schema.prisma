@@ -28,3 +28,19 @@ model Stats {
   updatedat     DateTime @default(now()) @db.DateTime(0)
   discordid     String?  @unique(map: "discordid") @db.VarChar(19)
 }
+
+model GameStats {
+  id              Int      @id @default(autoincrement())
+  createdat       DateTime @default(now()) @db.Date
+  gamemap         String   @db.VarChar(25)
+  totalkills      Int
+  totaldeaths     Int
+  totalarrowsshot Int
+  totalarrowshit  Int
+  blocksplaced    Int
+  blocksbroken    Int
+  matchduration   BigInt
+  winner          String   @db.VarChar(50)
+  teambluemembers String
+  teamredmembers  String
+}

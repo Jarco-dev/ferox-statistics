@@ -3,7 +3,7 @@ import type { CommandInteraction } from "discord.js";
 import type { StatisticType } from "../../types";
 
 class LeaderboardCommand extends BaseCommand {
-    public valueToString: {[key: string]: string};
+    public valueToString: { [key: string]: string };
 
     constructor() {
         super({
@@ -38,7 +38,7 @@ class LeaderboardCommand extends BaseCommand {
             arrowsshot: "Arrows shot",
             arrowshit: "Arrows hit",
             playtime: "Playtime"
-        }
+        };
     }
 
     public async run(i: CommandInteraction): Promise<void> {
@@ -46,7 +46,7 @@ class LeaderboardCommand extends BaseCommand {
         const statistic = i.options.getString("statistic", true) as StatisticType;
         const data = await this.prisma.stats.findMany({
             take: 10,
-            orderBy: [{ [statistic]: "desc" }, { updatedat: "asc" }],
+            orderBy: [{ [statistic]: "desc" }, { updatedat: "asc" }]
         });
 
         // Create and send the embed
@@ -54,13 +54,13 @@ class LeaderboardCommand extends BaseCommand {
         for (let i = 0; i < data.length; i++) {
             const username = await this.mojang.getUsername(data[i].uuid);
             let stat = (statistic === "playtime") ? this.global.parseTime(data[i][statistic] ?? 0) : data[i][statistic];
-            desc += `**${i+1}.** ${stat} - ${username}\n`;
+            desc += `**${i + 1}.** ${stat} - ${username}\n`;
         }
 
         const embed = this.global.embed()
             .setTitle(`${this.valueToString[statistic]} leaderboard`)
             .setDescription(desc);
-        this.sender.reply(i, {embeds: [embed]});
+        this.sender.reply(i, { embeds: [embed] });
     }
 }
 

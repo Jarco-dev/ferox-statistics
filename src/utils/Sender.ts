@@ -1,7 +1,7 @@
+import type { ButtonInteraction, CacheType, CommandInteraction, GuildCacheMessage, InteractionReplyOptions, MessageComponentInteraction, MessageOptions, ReplyMessageOptions, SelectMenuInteraction, Snowflake, TextBasedChannels, User } from "discord.js";
 import { Message, MessageEmbed } from "discord.js";
 import type Client from "../index";
 import type { SenderMessageOptions, SenderReplyOptions } from "../types";
-import type { ButtonInteraction, CacheType, CommandInteraction, GuildCacheMessage, InteractionReplyOptions, MessageComponentInteraction, MessageOptions, ReplyMessageOptions, SelectMenuInteraction, Snowflake, TextBasedChannels, User } from "discord.js";
 
 class Sender {
     private client: typeof Client;

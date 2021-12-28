@@ -77,6 +77,13 @@ class LinkCommand extends BaseCommand {
     }
 
     private async _runConfirmSubCommand(i: CommandInteraction): Promise<void> {
+        // Check link status
+        const linkedData = await this.prisma.stats.findUnique({ where: { discordid: i.user.id } });
+        if (linkedData) {
+            this.sender.reply(i, { content: "You are already linked, see `/link status` for more and `/link reset` to reset" }, { msgType: "INVALID" });
+            return;
+        }
+
         const token = i.options.getString("token", true);
         const data = await this.prisma.registrationCodes.findUnique({ where: { code: token } });
 
@@ -175,9 +182,9 @@ class LinkCommand extends BaseCommand {
             }, { msgType: "SUCCESS", method: "UPDATE" });
         } else if (i2.customId === "link_reset_confirm") {
             reply.components.forEach((row) => row.components.forEach((comp) => comp.disabled = true));
-            // await this.prisma.stats.update({ data: { discordid: null }, where: { uuid: data.uuid } });
+            await this.prisma.stats.update({ data: { discordid: null }, where: { uuid: data.uuid } });
             this.sender.reply(i2, {
-                content: "The accounts have been unlinked (database querry currently disabled)",
+                content: "The accounts have been unlinked",
                 components: reply.components
             }, { msgType: "SUCCESS", method: "UPDATE" });
         }

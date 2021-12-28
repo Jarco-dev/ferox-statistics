@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "allowJs": false,
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "ES2021",
-    "forceConsistentCasingInFileNames": true,
-    "removeComments": true,
-    "outDir": "dist",
-    "baseUrl": "."
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "compilerOptions": {
+        "strict": true,
+        "allowJs": false,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "ES2021",
+        "forceConsistentCasingInFileNames": true,
+        "removeComments": true,
+        "outDir": "dist",
+        "baseUrl": "."
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

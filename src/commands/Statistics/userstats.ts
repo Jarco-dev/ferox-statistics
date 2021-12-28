@@ -8,7 +8,7 @@ class UserStatsCommand extends BaseCommand {
     constructor() {
         super({
             name: "userstats",
-            description: "View statistics of the ferox minecraft server",
+            description: "View user statistics from the ferox minecraft server",
             options: [
                 {
                     type: "STRING",
@@ -88,12 +88,12 @@ class UserStatsCommand extends BaseCommand {
         const userStats: UserStatistics = {
             ...data,
             username: username as string,
-            bowAccuracy: (data.arrowsshot === 0) ? `100%` : `${Math.round(data.arrowshit ?? 0 / data.arrowsshot ?? 0) * 100}%`,
+            bowAccuracy: (data.arrowsshot === 0) ? `100%` : `${Math.round((data.arrowshit / data.arrowsshot) * 100)}%`,
             createdat: moment.utc(data.createdat).format("YYYY-MM-DD HH:mm:ss UTC"),
-            updatedat: moment.utc(data.updatedat).format("YYYY-MM-DD HH:mm:ss UTC"),
             playtime: this.global.parseTime(data.playtime ?? 0),
             killDeathRatio: ((data.kills ?? 0) / (data.deaths ?? 0)).toFixed(2),
-            winLossRatio: (data.wins / data.loses).toFixed(2)
+            winLossRatio: (data.wins / data.loses).toFixed(2),
+            gamesPlayed: await this.prisma.gameStats.count({ where: { OR: [{ teamredmembers: { contains: data.uuid } }, { teambluemembers: { contains: data.uuid } }] } })
         };
 
         // Create and send the embed
@@ -101,10 +101,27 @@ class UserStatsCommand extends BaseCommand {
             .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/play.ferox.host`)
             .setTitle(userStats.username)
             .setThumbnail(`https://crafatar.com/renders/head/${userStats.uuid}?overlay`)
-            .addField("Misc", `\`>\` Nexuses broken: \`${userStats.nexusesbroken}\`\n\`>\` playtime: \`${userStats.playtime}\`\n\`>\` First join: \`${userStats.createdat}\`\n\`>\` Last game: \`${userStats.updatedat}\``)
-            .addField("Games", `\`>\` Wins: \`${userStats.wins}\`\n\`>\` Loses: \`${userStats.loses}\`\n\`>\` WLR: \`${userStats.winLossRatio}\``, true)
-            .addField("Bow", `\`>\` Shots taken: \`${userStats.arrowsshot}\`\n\`>\` Shots hit: \`${userStats.arrowshit}\`\n\`>\` Accuracy: \`${userStats.bowAccuracy}\``, true)
-            .addField("Combat", `\`>\` Kills: \`${userStats.kills}\`\n\`>\` Deaths: \`${userStats.deaths}\`\n\`>\` KDR: \`${userStats.killDeathRatio}\``, true);
+            .addField("Misc", `
+                \`>\` Games played: \`${userStats.gamesPlayed}\`
+                \`>\` Nexuses broken: \`${userStats.nexusesbroken}\`
+                \`>\` playtime: \`${userStats.playtime}\`
+                \`>\` First join: \`${userStats.createdat}\`
+            `)
+            .addField("Games", `
+                \`>\` Wins: \`${userStats.wins}\`
+                \`>\` Loses: \`${userStats.loses}\`
+                \`>\` WLR: \`${userStats.winLossRatio}\`
+            `, true)
+            .addField("Bow", `
+                \`>\` Shots taken: \`${userStats.arrowsshot}\`
+                \`>\` Shots hit: \`${userStats.arrowshit}\`
+                \`>\` Accuracy: \`${userStats.bowAccuracy}\`
+            `, true)
+            .addField("Combat", `
+                \`>\` Kills: \`${userStats.kills}\`
+                \`>\` Deaths: \`${userStats.deaths}\`
+                \`>\` KDR: \`${userStats.killDeathRatio}\`
+            `, true);
 
         const hidden = i.options.getBoolean("hidden");
         this.sender.reply(i, { embeds: [embed], ephemeral: (hidden === true) });

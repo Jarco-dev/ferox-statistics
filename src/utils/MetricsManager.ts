@@ -1,9 +1,9 @@
+import type { Express } from "express";
 import express from "express";
+import type { GCStatistics, GCStatsEventEmitter } from "@sematext/gc-stats";
 import gcStats from "@sematext/gc-stats";
 import PromClient from "prom-client";
-import type { Express } from "express";
 import type Client from "../index";
-import type { GCStatistics, GCStatsEventEmitter } from "@sematext/gc-stats";
 
 class MetricsManager {
     public port: number;
