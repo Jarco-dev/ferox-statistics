@@ -101,27 +101,10 @@ class UserStatsCommand extends BaseCommand {
             .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/${this.sConfig.MISC.SERVER_IP}`)
             .setTitle(userStats.username)
             .setThumbnail(`https://crafatar.com/renders/head/${userStats.uuid}?overlay`)
-            .addField("Misc", `
-                \`>\` Games played: \`${userStats.gamesPlayed}\`
-                \`>\` Nexuses broken: \`${userStats.nexusesbroken}\`
-                \`>\` playtime: \`${userStats.playtime}\`
-                \`>\` First join: \`${userStats.createdat}\`
-            `)
-            .addField("Games", `
-                \`>\` Wins: \`${userStats.wins}\`
-                \`>\` Loses: \`${userStats.loses}\`
-                \`>\` WLR: \`${userStats.winLossRatio}\`
-            `, true)
-            .addField("Bow", `
-                \`>\` Shots taken: \`${userStats.arrowsshot}\`
-                \`>\` Shots hit: \`${userStats.arrowshit}\`
-                \`>\` Accuracy: \`${userStats.bowAccuracy}\`
-            `, true)
-            .addField("Combat", `
-                \`>\` Kills: \`${userStats.kills}\`
-                \`>\` Deaths: \`${userStats.deaths}\`
-                \`>\` KDR: \`${userStats.killDeathRatio}\`
-            `, true);
+            .addField("Misc", `\`>\` Games played: \`${userStats.gamesPlayed}\`\n\`>\` Nexuses broken: \`${userStats.nexusesbroken}\`\n\`>\` playtime: \`${userStats.playtime}\`\n\`>\` First join: \`${userStats.createdat}\``)
+            .addField("Games", `\n\`>\` Wins: \`${userStats.wins}\`\n\`>\` Loses: \`${userStats.loses}\`\n\`>\` WLR: \`${userStats.winLossRatio}\``, true)
+            .addField("Bow", `\`>\` Shots taken: \`${userStats.arrowsshot}\`\n\`>\` Shots hit: \`${userStats.arrowshit}\\n\`>\` Accuracy: \`${userStats.bowAccuracy}\``, true)
+            .addField("Combat", `\`>\` Kills: \`${userStats.kills}\`\n\`>\` Deaths: \`${userStats.deaths}\`\n\`>\` KDR: \`${userStats.killDeathRatio}\``, true);
 
         const hidden = i.options.getBoolean("hidden");
         this.sender.reply(i, { embeds: [embed], ephemeral: (hidden === true) });
