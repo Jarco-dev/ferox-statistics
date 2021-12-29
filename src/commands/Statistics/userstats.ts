@@ -25,7 +25,7 @@ class UserStatsCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "ENABLED"
+            status: "DEV"
         });
     }
 
@@ -103,7 +103,7 @@ class UserStatsCommand extends BaseCommand {
             .setThumbnail(`https://crafatar.com/renders/head/${userStats.uuid}?overlay`)
             .addField("Misc", `\`>\` Games played: \`${userStats.gamesPlayed}\`\n\`>\` Nexuses broken: \`${userStats.nexusesbroken}\`\n\`>\` playtime: \`${userStats.playtime}\`\n\`>\` First join: \`${userStats.createdat}\``)
             .addField("Games", `\n\`>\` Wins: \`${userStats.wins}\`\n\`>\` Loses: \`${userStats.loses}\`\n\`>\` WLR: \`${userStats.winLossRatio}\``, true)
-            .addField("Bow", `\`>\` Shots taken: \`${userStats.arrowsshot}\`\n\`>\` Shots hit: \`${userStats.arrowshit}\\n\`>\` Accuracy: \`${userStats.bowAccuracy}\``, true)
+            .addField("Bow", `\`>\` Shots taken: \`${userStats.arrowsshot}\`\n\`>\` Shots hit: \`${userStats.arrowshit}\`\n\`>\` Accuracy: \`${userStats.bowAccuracy}\``, true)
             .addField("Combat", `\`>\` Kills: \`${userStats.kills}\`\n\`>\` Deaths: \`${userStats.deaths}\`\n\`>\` KDR: \`${userStats.killDeathRatio}\``, true);
 
         const hidden = i.options.getBoolean("hidden");
