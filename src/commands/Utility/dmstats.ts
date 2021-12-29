@@ -7,7 +7,7 @@ class DmStatsCommand extends BaseCommand {
             name: "dmstats",
             description: "Toggle statistics being sent to you in dm after each game",
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 
