@@ -90,7 +90,7 @@ class UserStatsCommand extends BaseCommand {
             username: username as string,
             bowAccuracy: (data.arrowsshot === 0) ? `100%` : `${Math.round((data.arrowshit / data.arrowsshot) * 100)}%`,
             createdat: moment.utc(data.createdat).format("YYYY-MM-DD HH:mm:ss UTC"),
-            playtime: this.global.parseTime(data.playtime ?? 0),
+            playtime: this.global.parseTime(data.playtime ?? 0) || "None on record",
             killDeathRatio: ((data.kills ?? 0) / (data.deaths ?? 0)).toFixed(2),
             winLossRatio: (data.wins / data.loses).toFixed(2),
             gamesPlayed: await this.prisma.gameStats.count({ where: { OR: [{ teamredmembers: { contains: data.uuid } }, { teambluemembers: { contains: data.uuid } }] } })
@@ -105,6 +105,7 @@ class UserStatsCommand extends BaseCommand {
             .addField("Games", `\n\`>\` Wins: \`${userStats.wins}\`\n\`>\` Loses: \`${userStats.loses}\`\n\`>\` WLR: \`${userStats.winLossRatio}\``, true)
             .addField("Bow", `\`>\` Shots taken: \`${userStats.arrowsshot}\`\n\`>\` Shots hit: \`${userStats.arrowshit}\`\n\`>\` Accuracy: \`${userStats.bowAccuracy}\``, true)
             .addField("Combat", `\`>\` Kills: \`${userStats.kills}\`\n\`>\` Deaths: \`${userStats.deaths}\`\n\`>\` KDR: \`${userStats.killDeathRatio}\``, true);
+
 
         const hidden = i.options.getBoolean("hidden");
         this.sender.reply(i, { embeds: [embed], ephemeral: (hidden === true) });
