@@ -36,7 +36,7 @@ class DmStats extends BaseFeature {
         const userIds: Snowflake[] = [];
         const gameStats: GameStatistics = {
             ...data,
-            killDeathRatio: (data.totaldeaths > 0 && data.totalkills > 0) ? (data.totalkills / data.totaldeaths).toFixed(2) : "0.00",
+            killDeathRatio: (data.totaldeaths > 0 && data.totalkills > 0) ? (data.totaldeaths / data.totalkills).toFixed(2) : "0.00",
             bowAccuracy: (data.totalarrowsshot === 0) ? `100%` : `${Math.round((data.totalarrowsshot / data.totalarrowsshot) * 100)}%`,
             matchduration: this.global.parseTime(parseInt(data.matchduration.toString())),
             teamBlueNames: [],
@@ -74,26 +74,10 @@ class DmStats extends BaseFeature {
         const embed = this.global.embed()
             .setAuthor("FeroxCore", `https://api.mcsrvstat.us/icon/${this.sConfig.MISC.SERVER_IP}`)
             .setTitle(`Game #${gameStats.id}`)
-            .addField("Misc", `
-                \`>\` Winner: \`${gameStats.winner}\`
-                \`>\` Map: \`${gameStats.gamemap}\`
-                \`>\` Duration: \`${gameStats.matchduration}\`
-                \`>\` Date: \`${gameStats.createdat}\`
-            `)
-            .addField("Bow", `
-                \`>\` Shots taken: \`${gameStats.totalarrowsshot}\`
-                \`>\` Shots hit: \`${gameStats.totalarrowshit}\`
-                \`>\` Accuracy: \`${gameStats.bowAccuracy}\`
-            `, true)
-            .addField("Combat", `
-                \`>\` Kills: \`${gameStats.totalkills}\`
-                \`>\` Deaths: \`${gameStats.totaldeaths}\`
-                \`>\` KDR: \`${gameStats.killDeathRatio}\`
-            `, true)
-            .addField("Blocks", `
-                \`>\` Placed: \`${gameStats.blocksplaced}\`
-                \`>\` Broken: \`${gameStats.blocksbroken}\`
-            `, true)
+            .addField("Misc", `\`>\` Winner: \`${gameStats.winner}\`\n\`>\` Map: \`${gameStats.gamemap}\`\n\`>\` Duration: \`${gameStats.matchduration}\`\n\`>\` Date: \`${gameStats.createdat}\``)
+            .addField("Bow", `\`>\` Shots taken: \`${gameStats.totalarrowsshot}\`\n\`>\` Shots hit: \`${gameStats.totalarrowshit}\`\n\`>\` Accuracy: \`${gameStats.bowAccuracy}\``, true)
+            .addField("Combat", `\`>\` Kills: \`${gameStats.totalkills}\`\n\`>\` Deaths: \`${gameStats.totaldeaths}\`\n\`>\` KDR: \`${gameStats.killDeathRatio}\``, true)
+            .addField("Blocks", `\`>\` Placed: \`${gameStats.blocksplaced}\`\n\`>\` Broken: \`${gameStats.blocksbroken}\``, true)
             .addField(`Team red (${gameStats.teamRedNames.length})`, gameStats.teamRedNames.join(", ") || "No usernames found", true)
             .addField(`Team blue (${gameStats.teamBlueNames.length})`, gameStats.teamBlueNames.join(", ") || "No usernames found", true);
 

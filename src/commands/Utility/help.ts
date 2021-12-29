@@ -12,7 +12,6 @@ class HelpCommand extends BaseCommand {
     }
 
     public run(i: CommandInteraction): void {
-
         let cmdData: string[] = [];
 
         for (const cmdName in this.commandLoader.commands) {
