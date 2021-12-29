@@ -36,8 +36,8 @@ class DmStats extends BaseFeature {
         const userIds: Snowflake[] = [];
         const gameStats: GameStatistics = {
             ...data,
-            killDeathRatio: (data.totaldeaths > 0 && data.totalkills > 0) ? (data.totaldeaths / data.totalkills).toFixed(2) : "0.00",
-            bowAccuracy: (data.totalarrowsshot === 0) ? `100%` : `${Math.round((data.totalarrowsshot / data.totalarrowsshot) * 100)}%`,
+            killDeathRatio: (data.totaldeaths > 0 && data.totalkills > 0) ? (data.totalkills / data.totaldeaths).toFixed(2) : "0.00",
+            bowAccuracy: (data.totalarrowsshot === 0) ? `100%` : `${Math.round((data.totalarrowshit / data.totalarrowsshot) * 100)}%`,
             matchduration: this.global.parseTime(parseInt(data.matchduration.toString())),
             teamBlueNames: [],
             teamRedNames: [],
