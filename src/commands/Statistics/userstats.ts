@@ -25,7 +25,7 @@ class UserStatsCommand extends BaseCommand {
                 }
             ],
             cooldown: 3000,
-            status: "DEV"
+            status: "ENABLED"
         });
     }
 
