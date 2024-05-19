@@ -140,6 +140,7 @@ class GameStatsCommand extends BaseCommand {
                 // Crate the component
                 const options: MessageSelectOptionData[] = [];
                 for (let i = 0; i < data.length; i++) {
+                    if (options.length === 25) break;
                     options.push({
                         label: `Game #${data[i].id}`,
                         description: `View the statistics of game #${data[i].id}`,

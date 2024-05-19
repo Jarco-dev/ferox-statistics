@@ -39,14 +39,14 @@ class MojangApiManager {
             return this.uuidToNameCache[uuid];
         }
 
-        const res = await fetch(`https://api.mojang.com/user/profiles/${uuid}/names`)
+        const res = await fetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`)
             .catch(err => this.logger.error(`Error while fetching username from mojang uuid: ${uuid}`, err));
 
         if (!res) return undefined;
 
         if (res.status === 200) {
-            const names = await res.json();
-            this.uuidToNameCache[uuid] = names[names.length - 1].name;
+            const profile = await res.json();
+            this.uuidToNameCache[uuid] = profile.name;
             setTimeout(() => delete this.uuidToNameCache[uuid], 900000);
             return this.uuidToNameCache[uuid];
         } else {
