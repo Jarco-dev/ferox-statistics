@@ -1,0 +1,13 @@
+services:
+  bot:
+    build:
+      target: PRODUCTION
+    environment:
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+      - TOKEN=${TOKEN}
+    volumes:
+      - "bot_data:/usr/src/app/storage"
+      - "./secret/config.js:/usr/src/app/secret/config.js"
+
+volumes:
+  bot_data:

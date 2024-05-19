@@ -14,9 +14,8 @@
     },
     "author": "Jarco-dev",
     "dependencies": {
-        "@prisma/client": "^3.7.0",
-        "@sematext/gc-stats": "^1.5.5",
-        "canvas": "^2.8.0",
+        "@prisma/client": "^5.14.0",
+        "@sematext/gc-stats": "^1.5.7",
         "discord.js": "^13.3.1",
         "dotenv": "^10.0.0",
         "express": "^4.17.2",
@@ -29,9 +28,9 @@
         "@types/sematext__gc-stats": "^1.5.0",
         "copyfiles": "^2.4.1",
         "nodemon": "^2.0.15",
-        "prisma": "^3.7.0",
+        "prisma": "^5.14.0",
         "rimraf": "^3.0.2",
         "ts-node": "^10.4.0",
-        "typescript": "^4.5.4"
+        "typescript": "4.7"
     }
 }
